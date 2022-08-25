@@ -50,13 +50,13 @@ import "sort"
 
 // @lc code=start
 func longestCommonPrefix(strs []string) string {
-
+	// First, sort the string slice
 	sort.Strings(strs)
 
 	prefix := ""
 
 	n := len(strs)
-
+	// After sort. we only need compare the first word with the last word
 	first_word := strs[0]
 	
 	last_word := strs[n-1]
@@ -64,6 +64,7 @@ func longestCommonPrefix(strs []string) string {
 	length := len(first_word)
 
 	for i:=0; i<length; i++ {
+		// compare start from the first char of first word and last word, if same, try next char. once diff, break the for loop.
 		if first_word[i] == last_word[i]{
 			prefix = prefix + string(first_word[i])
 		} else {
