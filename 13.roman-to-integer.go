@@ -96,12 +96,14 @@ func romanToInt(s string) int {
 	total := 0
 
 	
-
+ 
 	for i := 0 ; i < n  ; i++ {
 		num := roman[string(s[i])]
+		// directly convert the last roman char to number and add to total, for it cannot compare with the right char
 		if i == n - 1 {
 			total += num
 		} else {
+			// compare roman char to the right one, if large ,add. if small, minus 
 			if num >= roman[ string(s[i + 1]) ] {
 				total += num
 			} else {
