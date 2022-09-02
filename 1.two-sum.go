@@ -62,19 +62,19 @@ package leetcode
 
 // @lc code=start
 func twoSum(nums []int, target int) []int {
-
-	hashmap := make(map[int]int)
-
-	for i, num := range(nums) {
-		_, ok := hashmap[num]
-		if ok {
-			return []int{i, hashmap[num]}
-		}
-
-		hashmap[target - num] = i
-	}
-
-
+    
+    m := make(map[int]int)
+    
+    for i, num := range nums {
+        _, ok := m[num]
+        
+        if ok {
+            return []int{i, m[num]}
+        }
+        
+        m[target - num] = i
+    }
+    
     return nil
 }
 // @lc code=end
