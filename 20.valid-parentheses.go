@@ -55,77 +55,72 @@
  * 
  */
 
-package leetcode
+
 // @lc code=start
 func isValid(s string) bool {
-	if len(s) == 0 {
-		return true
-	}
-	p := map[string]string {
+    
+    m := map[string]string {
 		")": "(",
 		"]": "[",
 		"}": "{",
-	}
-	var stack []string
-
-	 for _,c := range s {
-		w := string(c)
-		// 遇到左括号入栈，遇到右括号如果 栈不为空 并且栈尾为对应的左括号， 移除栈尾
-		/*
-		 If left bracket, push onto the stack, 
-		 If right bracket is encountered, if the stack is not empty and the last in stack is the corresponding left bracket, 
-		 remove the last in stack
-		*/
-		if v, ok := p[w] ; ok {
-			if len(stack) > 0 && stack[len(stack)-1] == v {
-				stack = stack[:len(stack)-1]
-			} else {
-				// 如果栈为空，但是轮训到右括号，返回false
-				// If the stack is empty, but the right parenthesis is encountered, return false
-				return false
-			}
-		} else {
-			//左括号入栈
-			//left bracket, push onto the stack,
-			stack = append(stack, w)
-		}
-		
-	}
-	//如果最后栈为空，说明所有的括号都按照顺序配对，返回 true，否则 false
-	//If in the end, the stack is empty, indicating that all parentheses are matched in order, return true, otherwise return false
-	return len(stack) ==0 
+    }
+    
+    arr := []string{}
+    
+    for _,v := range s{
+        
+        if i, ok := m[string(v)]; ok {
+            if len(arr) > 0 && arr[len(arr)-1] == i {
+                arr = arr[:len(arr)-1]
+            }else{
+                return false
+            }
+        }else{
+            arr = append(arr, string(v))
+        }
+    }
+     return len(arr)==0
 }
+
+
 
 // @lc code=end
 
-
 // func isValid(s string) bool {
+// 	if len(s) == 0 {
+// 		return true
+// 	}
 // 	p := map[string]string {
 // 		")": "(",
 // 		"]": "[",
 // 		"}": "{",
 // 	}
-
 // 	var stack []string
 
 // 	 for _,c := range s {
 // 		w := string(c)
-
+// 		// 遇到左括号入栈，遇到右括号如果 栈不为空 并且栈尾为对应的左括号， 移除栈尾
+// 		/*
+// 		 If left bracket, push onto the stack, 
+// 		 If right bracket is encountered, if the stack is not empty and the last in stack is the corresponding left bracket, 
+// 		 remove the last in stack
+// 		*/
 // 		if v, ok := p[w] ; ok {
 // 			if len(stack) > 0 && stack[len(stack)-1] == v {
 // 				stack = stack[:len(stack)-1]
 // 			} else {
+// 				// 如果栈为空，但是轮训到右括号，返回false
+// 				// If the stack is empty, but the right parenthesis is encountered, return false
 // 				return false
 // 			}
 // 		} else {
+// 			//左括号入栈
+// 			//left bracket, push onto the stack,
 // 			stack = append(stack, w)
 // 		}
 		
 // 	}
-// 	if len(stack) ==0 {
-// 		return true
-// 	} else {
-// 		return false
-// 	}
-
+// 	//如果最后栈为空，说明所有的括号都按照顺序配对，返回 true，否则 false
+// 	//If in the end, the stack is empty, indicating that all parentheses are matched in order, return true, otherwise return false
+// 	return len(stack) ==0 
 // }
