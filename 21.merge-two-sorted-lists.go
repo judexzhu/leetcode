@@ -62,19 +62,49 @@ package leetcode
  * }
  */
 func mergeTwoLists(list1 *ListNode, list2 *ListNode) *ListNode {
-     if list1 == nil {
-		return list2
-	 }
-	 if list2 == nil {
-		return list1
-	 }
-
-	 if list1.Val < list2.Val {
-		list1.Next = mergeTwoLists(list1.Next, list2)
-		return list1
-	 }
-	 list2.Next = mergeTwoLists(list1, list2.Next)
-	 return list2
+    
+    // create a emtpy dummpy node 
+    dummy := &ListNode{}
+    tail := dummy
+    // if list1 and list2 are not emtpty(nil)
+    for list1 != nil && list2 != nil{
+        // if current list1 node value is smaller
+        if list1.Val < list2.Val{
+            // link cuurent list1 node to the dummy node next
+            tail.Next = list1
+            // move current list1 node to the list next node
+            list1 = list1.Next
+        }else{
+            // if list2 current node value smaller, do the same to list2
+            tail.Next = list2
+            list2 = list2.Next
+        }
+        // after linked the smaller node to the dummy list, move dummy node to the next node
+        tail = tail.Next
+    }
+    // previously we have done with the both list are not empty
+    // Now let's check if one of them are empty
+    // then link the other one to the dummy listnode
+    if list1 == nil{
+        tail.Next = list2
+    }else{
+        tail.Next = list1
+    }
+    return dummy.Next
 }
 // @lc code=end
+// func mergeTwoLists(list1 *ListNode, list2 *ListNode) *ListNode {
+// 	if list1 == nil {
+// 	   return list2
+// 	}
+// 	if list2 == nil {
+// 	   return list1
+// 	}
 
+// 	if list1.Val < list2.Val {
+// 	   list1.Next = mergeTwoLists(list1.Next, list2)
+// 	   return list1
+// 	}
+// 	list2.Next = mergeTwoLists(list1, list2.Next)
+// 	return list2
+// }
