@@ -53,19 +53,47 @@
  * }
  */
 func maxDepth(root *TreeNode) int {
-	// do exception
+	// BFS
 	if root == nil {
 		return 0
 	}
-    // if not nil, then at least 1 plus recusive max result from left or right children
-	return 1 + Max(maxDepth(root.Left), maxDepth(root.Right))
+
+	nodeList := []*TreeNode{root}
+	depth := 0
+
+	for len(nodeList) > 0{
+		for _, node := range nodeList {
+			nodeList = nodeList[1:]
+
+			if node.Left != nil {
+				nodeList = append(nodeList, node.Left)
+			}
+
+			if node.Right != nil {
+				nodeList = append(nodeList, node.Right)
+			}
+		}
+		depth++
+	}
+	return depth
 }
 
-func Max(a int, b int) int {
-	if a>b {
-		return a
-	}
-	return b
-}
+
 // @lc code=end
 
+// Solution 1, Recursive
+// func maxDepth(root *TreeNode) int {
+// 	// do exception
+// 	if root == nil {
+// 		return 0
+// 	}
+//     // if not nil, then at least 1 plus recusive max result from left or right children
+// 	return 1 + Max(maxDepth(root.Left), maxDepth(root.Right))
+// }
+
+// func Max(a int, b int) int {
+// 	if a>b {
+// 		return a
+// 	}
+// 	return b
+// }
